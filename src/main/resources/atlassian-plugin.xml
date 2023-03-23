@@ -1,0 +1,46 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+
+        <param name="plugin-icon">images/app_icon_16x16.png</param>
+        <param name="plugin-logo">images/app_logo_144x144.png</param>
+        <param name="vendor-logo">images/vendor_72.png</param>
+        <param name="vendor-icon">images/vendor_16.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="imageGrid"/>
+    <resource type="download" name="images/" location="/images"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="imagegrid-resources" name="imageGrid Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+
+        <resource type="download" name="imagesloaded.pkgd.min.js" location="/js/imagesloaded.pkgd.min.js"/>
+        <resource type="download" name="masonry.pkgd.min.js" location="/js/masonry.pkgd.min.js"/>
+        
+        <resource type="download" name="imageGrid.css" location="/css/imageGrid.css"/>
+        <resource type="download" name="imageGrid.js" location="/js/imageGrid.js"/>
+
+        <context>de.fuchsteufels.confluence.imageGrid</context>
+    </web-resource>
+
+    <xhtml-macro name="imagegrid-macro" class="de.fuchsteufels.confluence.imagegrid.macro.ImageGridMacro" key="imagegrid-macro" icon="/download/resources/${project.groupId}.${project.artifactId}/images/macro_icon_80x80.png">
+        <description key="de.fuchsteufels.confluence.imagegrid.macro.desc"/>
+        <category name="media"/>
+        <parameters>
+            <parameter name="width" type="enum" required="true">
+                <value name="210"/>
+                <value name="320"/>
+                <value name="430"/>
+                <value name="540"/>
+                <value name="650"/>
+            </parameter>
+            <parameter name="manualwidth" type="string" required="false"></parameter>
+            <!--<parameter name="content"  type="confluence-content" required="false"></parameter>-->
+        </parameters>
+    </xhtml-macro>
+
+</atlassian-plugin>
